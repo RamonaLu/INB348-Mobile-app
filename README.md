@@ -1,3 +1,3 @@
-INB348-Mobile-app-development
+INB348-Mobile-App-Development
 =================
 Description required
