@@ -1,10 +1,20 @@
 package inn348.muteme;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class ListMutesActivity extends Activity {
 
@@ -18,5 +28,39 @@ public class ListMutesActivity extends Activity {
 		ListAdapter mutesAdapter = new ArrayAdapter<String> (this, android.R.layout.simple_list_item_1, muteListData);
 		
 		muteListView.setAdapter(mutesAdapter);
+		
+		Button createMuteButton = (Button)findViewById(R.id.createMuteButton);
+		
+		OnClickListener createMuteListener = new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v) {
+				Intent newMute = new Intent(v.getContext(), MuteActivity.class);
+				startActivity(newMute);
+			}
+			
+		};
+		createMuteButton.setOnClickListener(createMuteListener);
+		
+		muteListView.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int arg2,
+					long arg3) {
+				Intent editMute = new Intent(ListMutesActivity.this,MuteActivity.class);
+				startActivity(editMute);
+			}
+		});
+		
+		muteListView.setOnItemLongClickListener(new OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View view,
+					int arg2, long arg3) {
+				return true;
+			}
+		});
+		
 	}
 }
