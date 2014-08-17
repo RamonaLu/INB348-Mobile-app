@@ -4,8 +4,9 @@
     <string name="app_name">MuteMe</string>
     <string name="create_mute">Create</string>
     <string name="title_activity_mute">MuteActivity</string>
-    <string name="action_settings">Settings</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
+    <string name="geo_everywhere">Everywhere</string>
+    <string name="chrono_always">Always</string>
 
 </resources>
