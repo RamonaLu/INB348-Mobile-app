@@ -3,10 +3,15 @@ package inn348.muteme;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
@@ -42,7 +47,6 @@ public class ListMutesActivity extends Activity {
 			
 		};
 		createMuteButton.setOnClickListener(createMuteListener);
-		
 		muteListView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -53,14 +57,41 @@ public class ListMutesActivity extends Activity {
 			}
 		});
 		
-		muteListView.setOnItemLongClickListener(new OnItemLongClickListener(){
+		registerForContextMenu(muteListView);
+	}
 
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View view,
-					int arg2, long arg3) {
-				return true;
-			}
-		});
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	   	ContextMenuInfo menuInfo) {
+		
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.mute_item_context, menu);
+		
+	  }
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case R.id.menu_edit:
+	            editMute();
+	            return true;
+	        case R.id.menu_delete:
+	            deleteMute();
+	            return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
+
+	private void deleteMute() {
+		// TODO Auto-generated method stub
 		
 	}
+
+	private void editMute() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
