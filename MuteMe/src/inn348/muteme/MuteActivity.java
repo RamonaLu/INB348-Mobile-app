@@ -2,8 +2,6 @@ package inn348.muteme;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MuteActivity extends Activity {
 

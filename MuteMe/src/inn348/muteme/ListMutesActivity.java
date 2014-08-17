@@ -1,7 +1,10 @@
 package inn348.muteme;
 
+import java.util.EnumSet;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -9,34 +12,49 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
 public class ListMutesActivity extends Activity {
 
+	Button createMuteButton;
+	ListView muteListView;
+	ListAdapter mutesAdapter;
+	
+	private Mute[] GetMutes(){
+		EnumSet<DayOfWeek> weekdays = EnumSet.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY);	
+		TimeSpan morning = new TimeSpan(new TimeOfDay(6, 30), new TimeOfDay(9, 30));
+		Location home = new Location("-27.455620, 153.059356");
+		
+		Mute[] sampleMutes = new Mute[] {
+			new Mute(
+				new GeoCondition(home, 50),
+				new ChronoCondition(morning, weekdays)
+			)
+		};
+		return sampleMutes;
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_mutes);
 		
-		ListView muteListView = (ListView)findViewById(R.id.muteListView);
-		String[] muteListData = new String[]{"Time and Location1","Time1","Location1"};
-		ListAdapter mutesAdapter = new ArrayAdapter<String> (this, android.R.layout.simple_list_item_1, muteListData);
-		
+		muteListView = (ListView)findViewById(R.id.muteListView);
+		createMuteButton = (Button)findViewById(R.id.createMuteButton);
+				
+		mutesAdapter = new ArrayAdapter<Mute> (this, android.R.layout.simple_list_item_1, GetMutes());		
 		muteListView.setAdapter(mutesAdapter);
 		
-		Button createMuteButton = (Button)findViewById(R.id.createMuteButton);
-		
-		OnClickListener createMuteListener = new OnClickListener()
+		RegisterListeners();
+	}
+
+	private void RegisterListeners() {
+		createMuteButton.setOnClickListener(new OnClickListener()
 		{
 
 			@Override
@@ -45,8 +63,7 @@ public class ListMutesActivity extends Activity {
 				startActivity(newMute);
 			}
 			
-		};
-		createMuteButton.setOnClickListener(createMuteListener);
+		});
 		muteListView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -58,6 +75,7 @@ public class ListMutesActivity extends Activity {
 		});
 		
 		registerForContextMenu(muteListView);
+		
 	}
 
 	@Override
@@ -72,6 +90,7 @@ public class ListMutesActivity extends Activity {
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
+		
 	    switch (item.getItemId()) {
 	        case R.id.menu_edit:
 	            editMute();
