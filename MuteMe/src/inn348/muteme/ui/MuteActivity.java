@@ -9,6 +9,6 @@ public class MuteActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_mute);
+		setContentView(R.layout.geo_condition);
 	}
 }

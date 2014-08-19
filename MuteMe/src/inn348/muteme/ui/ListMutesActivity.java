@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -117,7 +118,8 @@ public class ListMutesActivity extends Activity {
 	}
 	
 	private void editMute(Mute mute) {
-		
+		Intent editMute = new Intent(this, MuteActivity.class);
+		startActivity(editMute);
 	}
 	
 }
