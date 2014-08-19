@@ -8,5 +8,15 @@
     <string name="menu_delete">Delete</string>
     <string name="geo_everywhere">Everywhere</string>
     <string name="chrono_always">Always</string>
+    <string name="chrono_start_time">Start</string>
+    <string name="chrono_stop_time">Stop</string>
+    <string name="chrono_day_monday">M</string>
+    <string name="chrono_day_tuesday">T</string>
+    <string name="chrono_day_wednesday">W</string>
+    <string name="chrono_day_thursday">T</string>
+    <string name="chrono_day_friday">F</string>
+    <string name="chrono_day_saturday">S</string>
+    <string name="chrono_day_sunday">S</string>
+    <string name="chrono_days_of_week">Days</string>
 
 </resources>
